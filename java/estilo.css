@@ -1,0 +1,32 @@
+body{
+background: #27264d;
+font-size: 30px;
+font-family: monospace;
+text-align: center;
+
+
+}
+header{
+    color: azure;
+}
+section{
+background: azure;
+border-radius: 5px;
+border: blueviolet;
+width: 80%;
+
+box-shadow: 5px 5px 10px #a11b8f98;
+
+
+margin: auto;
+
+}
+footer{
+    color: azure;
+    text-align: center;
+    padding-top: 20%;
+}
+
+.splide__slide img{
+    width: 100%;
+}
