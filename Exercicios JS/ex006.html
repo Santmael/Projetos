@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="PT-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma numero</title>
+</head>
+
+    <style>
+       
+    </style>
+
+
+<body>
+    <h1> Somando numero</h1>
+
+<input type="number" name="label1" id="label1">+
+<input type="number" name="label2" id="label2"><br>
+<div id=resultado>
+    resultado
+</div>
+
+
+
+<button id="btnsoma" onclick="calcular()">calcular</button>
+
+    <script>
+        //função de soma 
+        function calcular(){
+            //pega o elemento do input com o id label1
+            var l1 = window.document.querySelector('input#label1')
+            //pega o elemento do input com o id label2
+            var l2 = window.document.querySelector('input#label2')
+            //pega o elemento da div com o id resultado para onde vai o resultado da soma
+            var res = window.document.getElementById('resultado')
+            //converte o label que é em texto para tipo numero ou number
+            var n1 = Number.parseInt(l1.value)
+            var n2 = Number.parseInt(l2.value)
+            //realiza  soma
+            var s = n1 + n2
+            //resultado da soma na tela com a conversão novamente para string para aparecer na div corretamente.           
+            res.innerText = `o resultado da soma do elemento ${n1} mais o elemento ${n2} é igual a ${String(s)}`
+        }
+       
+    </script>
+</body>
+</html>
