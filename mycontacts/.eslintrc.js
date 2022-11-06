@@ -15,5 +15,6 @@ module.exports = {
     'consistent-return': 'off',
     'no-shadow': 'off',
     'prefer-const': 'off',
+    camelcase: 'off',
   },
 };

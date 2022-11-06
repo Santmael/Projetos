@@ -20,12 +20,46 @@ class ContactController {
     response.json(contact);
   }
 
-  store() {
-    // criar novo registro
+  async store(request, response) {
+    const {
+      name, email, phone, category_id,
+    } = request.body;
+    if (!name || !email) {
+      return response.status(404).json({ error: 'Campo de nome ou Email Vazio' });
+    }
+    const contactExist = await ContactRepositories.findEmail(email);
+
+    if (contactExist) {
+      return response.status(404).json({ error: 'usuario já cadastrado' });
+    }
+    const contactss = await ContactRepositories.create({
+      name, email, phone, category_id,
+    });
   }
 
-  update() {
-    // editar 1 registro.
+  async update(request, response) {
+    const { id } = request.params;
+    const {
+      name, email, phone, category_id,
+    } = request.body;
+
+    const contactExist = await ContactRepositories.findById(id);
+    if (!contactExist) {
+      return response.status(400).json({ error: 'usuário não encontrado' });
+    }
+
+    if (!name) {
+      return response.status(400).json({ error: 'nome ja em uso' });
+    }
+
+    const contactByEmail = await ContactRepositories.findByEmail(email);
+    if (contactByEmail && contactByEmail.id !== id) {
+      return response.status(404).json({ error: 'email já cadastrado' });
+    }
+    const contact = await ContactRepositories.update(id, {
+      name, email, phone, category_id,
+    });
+    response.json(contact);
   }
 
   async delete(request, response) {
