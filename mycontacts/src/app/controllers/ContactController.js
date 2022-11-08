@@ -32,9 +32,10 @@ class ContactController {
     if (contactExist) {
       return response.status(404).json({ error: 'usuario já cadastrado' });
     }
-    const contactss = await ContactRepositories.create({
+    const contacts = await ContactRepositories.create({
       name, email, phone, category_id,
     });
+    response.json(contacts);
   }
 
   async update(request, response) {
