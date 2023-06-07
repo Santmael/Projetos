@@ -16,5 +16,6 @@ module.exports = {
     'no-shadow': 'off',
     'prefer-const': 'off',
     camelcase: 'off',
+    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
   },
 };

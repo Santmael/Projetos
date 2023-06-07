@@ -3,7 +3,8 @@ const ContactRepositories = require('../repositories/ContactRepositories');
 class ContactController {
   // obeter todos os registros
   async index(request, response) {
-    const contacts = await ContactRepositories.findAll();
+    const { orderBy } = request.query;
+    const contacts = await ContactRepositories.findAll(orderBy);
 
     response.json(contacts);
   }
@@ -27,7 +28,7 @@ class ContactController {
     if (!name || !email) {
       return response.status(404).json({ error: 'Campo de nome ou Email Vazio' });
     }
-    const contactExist = await ContactRepositories.findEmail(email);
+    const contactExist = await ContactRepositories.findByEmail(email);
 
     if (contactExist) {
       return response.status(404).json({ error: 'usuario já cadastrado' });
@@ -65,12 +66,7 @@ class ContactController {
 
   async delete(request, response) {
     const { id } = request.params;
-    const contact = await ContactRepositories.findById(id);
 
-    if (!contact) {
-      // 404 not found, não encontrado
-      return response.status(404).json({ error: 'user not found, usuario não encontrado' });
-    }
     await ContactRepositories.delete(id);
     // não content, sem conteudo
     response.sendStatus(204);
